@@ -65,8 +65,8 @@ categories:
 
 	* [kv260_ispMipiRx_vcu_DP](https://github.com/Xilinx/kv260-vitis/blob/release-2020.2.2_k26/platforms/vivado/kv260_ispMipiRx_vcu_DP/xdc/pin.xdc)
 
+See `kv260_pinout.py`.
 
-```
 M2C: module to carrier board
 C2M: carrier board to module
 
