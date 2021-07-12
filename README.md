@@ -178,6 +178,28 @@ C2M: carrier board to module
 
 # From Nothing to Switching Fan On and Off
 
+All of this below assumes that you have PetaLinux running on the KV260 board. In other words,
+you went through the Getting Started sequences to create an SDCard with PetaLinux and booted
+the board from that.
+
+Once that's done, the PS of the FPGA is configured such that there's 100MHz clock for the
+PL, and the PL part is switched on and ready to receive a bitstream, from the PS or through
+JTAG. 
+
+On the KV260, I can find no clock that can be used straight by the PL part, so the 
+PL part must get its clock from the PS. And this needs a whole song and dance with
+the IP Block GUI to link your own design to the clock of the MPSoC part.
+
+That's what described below.
+
+It's possible to have the SoC run a barebones firmware instead of Linux, but I haven't 
+gotten this far yet...
+
+Another thing to keep in mind is that I'm using the FPGA IO pins that I figured out along the way
+(and that can be found in `./kv260_pinout.py`.) I'm not using defintions from the board files,
+because I haven't figured out how to do that yet...
+
+
 * Start Vivado
 * Quick Start -> Create Project
 * Project name: `kv260_fan_test`, Project location: `/home/tom/projects`
@@ -283,10 +305,8 @@ for 6 seconds and then switch off for 2 seconds.
 
 SUCCESS!!!
 
-
-* Create a working PetaLinux SDcard.
-    * There is a barebones image for the CPUs, but I haven't gone to that yet
-    * Boot up the board, make sure you can log in to it with ssh or UART
+If you booted the board without an SDCard and without loading a barebones FW somehow, then the
+PL part isn't activated, and you can't run a bitstream on the FPGA.
 
 # Tutorial
 
