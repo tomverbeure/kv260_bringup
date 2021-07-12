@@ -17,6 +17,68 @@
 * Install Vitis: this includes Vivado!
 * Install PetaLinux
 
+# Activate USB JTAG Cable
+
+ The KV260 board uses a quad FTDI [FT4232HL](https://ftdichip.com/products/ft4232hl/) chip, which is connected to the following:
+
+* JTAG interface of the FPGA
+* SOM UART
+* STDP4320 UART
+* MIO I2C  M24C64 EEPROM WC_B write control
+
+`lsusb` shows the following vendor id and product ID:
+
+```
+Bus 001 Device 014: ID 0403:6011 Future Technology Devices International, Ltd FT4232H Quad HS USB-UART/FIFO IC
+```
+
+The UART part should just work without driver (at least it did for me), but you need to install the `udev` rules file
+to enable JTAG control:
+
+```sh
+cd ~/tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers
+sudo ./install_drivers
+``` 
+
+result:
+
+```
+INFO: Installing cable drivers.
+INFO: Script name = ./install_drivers
+INFO: HostName = zen
+INFO: Current working dir = /home/tom/tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers
+INFO: Kernel version = 5.8.0-59-generic.
+INFO: Arch = x86_64.
+Successfully installed Digilent Cable Drivers
+--File /etc/udev/rules.d/52-xilinx-ftdi-usb.rules does not exist.
+--File version of /etc/udev/rules.d/52-xilinx-ftdi-usb.rules = 0000.
+--Updating rules file.
+--File /etc/udev/rules.d/52-xilinx-pcusb.rules does not exist.
+--File version of /etc/udev/rules.d/52-xilinx-pcusb.rules = 0000.
+--Updating rules file.
+
+INFO: Digilent Return code = 0
+INFO: Xilinx Return code = 0
+INFO: Xilinx FTDI Return code = 0
+INFO: Return code = 0
+INFO: Driver installation successful.
+CRITICAL WARNING: Cable(s) on the system must be unplugged then plugged back in order for the driver scripts to update the cables.
+```
+
+See also [Xilinx installation manual](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_2/ug973-vivado-release-notes-install-license.pdf#page=49).
+
+As always, I had to reboot to make things stick after this...
+
+* PROGRAM AND DEBUG
+* Open Hardware Manager
+* Open Target
+* Auto Connect
+
+Result:
+
+![Hardware Manager](./docs/hardware_manager.png)
+
+
 # KV260
 
 Features:
