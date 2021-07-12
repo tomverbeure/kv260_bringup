@@ -100,6 +100,7 @@ Features:
 * 64 UltraRAM blocks
 * 1248 DSP slices
 
+Documents
 
 * [Official Documentation](https://www.xilinx.com/products/som/kria/kv260-vision-starter-kit.html#documentation)
 * [Motherboard Schematic](https://www.xilinx.com/member/forms/download/design-license.html?cid=3eb7e365-5378-461f-b8b0-bb3dad84eb4e&filename=xtp682-kria-k26-carrier-card-schematic.zip)
