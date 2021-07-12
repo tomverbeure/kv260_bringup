@@ -176,6 +176,117 @@ C2M: carrier board to module
 	* PL0 clock -> Clocking Wizard IP block -> 5 clocks: clk200M, clk100M, clk300M, clk50M, clk600M
 		
 
+# From Nothing to Switching Fan On and Off
+
+* Start Vivado
+* Quick Start -> Create Project
+* Project name: `kv260_fan_test`, Project location: `/home/tom/projects`
+* Project Type: RTL Project
+
+    ![Project Type](./docs/4__Project_Type.png)
+
+* Default Part
+
+    ![Default Part](./docs/5__Default_Part.png)
+
+* New Project Summary -> Finish
+
+* Default Project Manager View
+
+    ![Project Manager View](./docs/6__Project_Manager_View.png)
+
+* Create Block Design
+
+    ![Create Block Design](./docs/7__Create_Block_Design.png)
+
+* Add Zynq MPSoC IP
+
+    ![Add Zynq MPSoC IP](./docs/8__Add_Zynq_MPSoC_IP.png)
+
+* Unchanged Zynq MPSoC Block
+
+    ![Unchanged Zynq MPSoC Block](./docs/9__Unchanged_MPSoC_Block.png)
+
+	Double click on the MPSoC Block.
+
+* MPSoC Configuration Screen
+
+    ![MPSoC Configuration](./docs/10__MPSoC_Configuration.png)
+
+* Disable AXI Interface on MPSoC
+
+	![Disable AXI Interface](./docs/11__Disable_AXI_Interface.png)
+
+* Add Sources
+
+	![Add Sources](./docs/12__Add_Sources.png)
+
+* Add top.v File
+
+	![Add top.v](./docs/13__top_v_added.png)
+
+* Add top.v as module to Block Design
+
+	![Add Module](./docs/14__Add_Module.png)
+
+* Create `fan` port
+
+	![Create Port](/docs/15__Create_Port.png)
+
+* Create HDL Wrapper
+
+	![Create HDL Wrapper](/docs/16__Create_HDL_Wrapper.png)
+
+* Top is now `top_with_zynq_wrapper` design 
+
+	![top_with_zynq_wrapper hierachy](/docs/17__top_with_zynq_wrapper.png)
+
+	You can change design toplevel by right clicking different design source and selecting "Set as Top"
+
+* Synthesize the design with Flow -> Run Synthesis (or press F11)
+
+	This will take quite a while. Vivado will create a bunch of different tasks called "Design Runs" and
+	execute those in parallel if it can.
+
+	![Design Runs](/docs/18__Design_Runs.png)
+
+* Do "Run Implementation": Flow -> Run Implementation
+
+	This merges all the design information into one FPGA design database.
+
+	![Run Implementation Completed](/docs/19__Run_Implementation_Completed.png)
+
+	Select "Open Implemented Design"
+
+* Assign pin location and voltage to `fan` port
+
+	![Assign fan Port Properties](/docs/20__Assign_Port_Properties.png)
+
+	Press [Ctrl-S] to save pin constraints.
+
+	![Save Pin Constraints](/docs/21__Save_Pin_Constraints.png)
+
+* Do `Run Implementation` again.
+
+	It will rerun a bunch of steps...
+
+	Select "Generate Bitstream" when all is done.
+
+* Open Hardware Manager when Bitstream generation has completed
+
+	![Bitstream Generation Completed](/docs/22__Bitstream_Generation_Completed.png)
+
+* In Hardware Manager: Open Target -> Autoconnect -> Program Device
+
+If you board booted from an SDCard with PetaLinux (and only then!!!), the fan will now spin on
+for 6 seconds and then switch off for 2 seconds.
+
+SUCCESS!!!
+
+
+* Create a working PetaLinux SDcard.
+    * There is a barebones image for the CPUs, but I haven't gone to that yet
+    * Boot up the board, make sure you can log in to it with ssh or UART
 
 # Tutorial
 
