@@ -282,6 +282,8 @@ because I haven't figured out how to do that yet...
 
 * Assign pin location and voltage to `fan` port
 
+	Open the I/O Ports tab through the top menu bar: Windows -> I/O Ports
+
 	![Assign fan Port Properties](/docs/20__Assign_Port_Properties.png)
 
 	Press [Ctrl-S] to save pin constraints.
